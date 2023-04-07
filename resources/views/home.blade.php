@@ -10,13 +10,13 @@
 <main class="text-center my-5 p-0 m-5">
     <!--  -->
     <div class="container">
-    <div class="content text-center">
-        @if(session('status'))
-        <div class="alert alert-success text-white" id="error_message">
-            {{ session('status') }}😊
+        <div class="content text-center">
+            @if(session('status'))
+            <div class="alert alert-success text-white" id="error_message">
+                {{ session('status') }}😊
+            </div>
+            @endif
         </div>
-        @endif
-    </div>
         <div class="row">
 
             <div class="col-md-12">
@@ -26,15 +26,24 @@
                         Welcome To
                         <i class="fas fa-cubes fa-1x me-3" style="color: #ff6219;">Blogs</i>
                     </h1>
-                    <div class="col mt-3">
-                        <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+                    <!-- <div class="col mt-3">
+                        <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4 d-flex" style="justify-content: space-between;">
                             <ol class="breadcrumb mb-0">
                                 <li class="breadcrumb-item"><a href="/post">Blogs</a></li>
                                 <li class="breadcrumb-item"><a href="/comments">Comments</a></li>
                                 <li class="breadcrumb-item active"> <a href="/category">Categories</a> </li>
                             </ol>
+                            <ol>
+                                <div class="bg-gray text-center  d-flex align-items-center justify-content-center border-radius-5">
+
+                                    <i class="material-icons opacity-10 " style="transform:translate(150% ,0); color:black;">search</i>
+                                    <input type="text" wire:model="search" class="form-control text-center form-control-lg bg-white" placeholder="Search" />
+
+
+                            </div>
+                            </ol>
                         </nav>
-                    </div>
+                    </div> -->
                 </div>
 
             </div>

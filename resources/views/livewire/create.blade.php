@@ -48,14 +48,23 @@
     }
 </style>
 <div class="container">
-
     <form method="POST" action="{{route('posts.store')}}" enctype="multipart/form-data">
         @csrf
         <h2> </h2>
         <!-- Gutter g-1 -->
         <section class="h-100 container ">
             <div class=" py-5 h-100 ">
-
+                
+                <div class="col mt-3">
+                    <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4 d-flex" style="justify-content: space-between;">
+                        <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/post">Blogs</a></li>
+                            <li class="breadcrumb-item"><a href="#">New Blog</a></li>
+                        </ol>
+                       
+                    </nav>
+                </div>
                 <div class="row d-flex justify-content-center align-items-center h-50   ">
                     <div class="col  ">
                         <div class="card card-registration p-5  bg-white" style="background-color:#fff; border-radius:20px; box-shadow: 0px 2px 10px 0px #eee;">

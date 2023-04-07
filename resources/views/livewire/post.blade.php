@@ -21,6 +21,7 @@
         border-radius: 50px;
         transition: all 0.3s;
     }
+
     textarea {
         border: 1px solid #070707;
         padding: 10px 30px;
@@ -110,81 +111,97 @@
                             <div class="text-center mt-2">
                                 {!!$post->post!!}
                             </div>
-                          
+
                             <hr>
                             <small>Written on {{$post->created_at->format('dS M Y')}} by <strong>{{Auth::user()->name}}</strong> </small>
                             <hr>
 
                             <div class="" style="display:flex;justify-content:space-between;">
 
-
                                 <a href="/edit/{{$post->id}}" class="btn btn-default">Edit</a>
-
 
                                 @method('DELETE')
                                 <a href="{{route('posts.delete',['id'=>$post->id])}}" class="btn btn-outline-danger">Delete</a>
                             </div>
-                            <div class="comments">
+                            <span  class="bg text-center text-white" >
+                                    <!-- Grid container -->
+                                    <div class="container p-4 pb-0">
+                                        <!-- Section: Social media -->
+                                        <h6>Share on :</h6>
 
-                            </div>
-                            <div class="mt-2 card p-3">
+                                        <section class="mb-4">
+                                            <!-- Facebook -->
+                                            <a class="btn  text-white btn-floating m-1" style="background-color: #3b5998;" href="https://www.facebook.com/sharer.php?u={{ urlencode(route('posts', $post->id)) }}" target="_blank" role="button"><i class="fab fa-facebook-f"></i></a>
 
-                                <form method="POST"  action="{{ route('comments.store', $post->id) }}" >
-                                    @csrf
-                                    <div class="form-group ">
-                                        <input type="hidden" value="{{ $post->id }}" name="post_id">
-
-                                        <textarea name="comments" id="comments" class="form-control " row="1" placeholder="add comment ......">{{ old('body') }}</textarea>
+                                            <!-- Twitter -->
+                                            <a class="btn text-white btn-floating m-1" style="background-color: #55acee;" href="https://twitter.com/share?url={{ urlencode(route('posts', $post->id)) }}" target="_blank" role="button"><i class="fab fa-twitter"></i></a>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Add Comment</button>
-                                </form>
-                                </div>
-                                <div class="development-image">
-                                    <a class="btn btn-outline-default" id="image2">Comments 😊</a>
 
-                                </div>
+                             
 
-                            <div id="developmen" class="mt-3">
+                            </span>
+                        
+                        <div class="comments w-100" style="border-top: 2px solid #eee;">
 
-                                <div class="p">
-                                    @foreach($comments as $comment)
-
-                                    @if(Auth::user()->id == $comment->user_id)
-                                    @if($post->id == $comment->post_id)
-
-                                    <div class="rounded border shadow p-3 my-2">
-                                        <div class="d-flex my-2" style="display:flex; justify-content:space-between;">
-                                            <div class="d-">
-                                                <h5>{{Auth::user()->name}}</h5>
-
-                                                <p class=" text-xs text-gray-500 font-semibold">{{$comment->created_at->diffForHumans()}}
-                                                </p>
-                                            </div>
-                                            <i class="fas fa-times text-red-200 hover:text-red-600 cursor-pointer" wire:click="remove({{$comment->id}})"></i>
-                                        </div>
-                                        <p class="text-gray-800 text-center">{{$comment->comments}}</p>
-
-                                    </div>
-                                    @endif
-                                    @endif
-
-                                    @endforeach
-
-                                </div>
-
-
-                            </div>
                         </div>
-                        {!!Form::close()!!}
+                        <div class="mt-2 card p-3">
+
+                            <form method="POST" action="{{ route('comments.store', $post->id) }}">
+                                @csrf
+                                <div class="form-group ">
+                                    <input type="hidden" value="{{ $post->id }}" name="post_id">
+
+                                    <textarea name="comments" id="comments" class="form-control " row="1" placeholder="add comment ......">{{ old('body') }}</textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Add Comment</button>
+                            </form>
+                        </div>
+                        <div class="development-image">
+                            <a class="btn btn-outline-default" id="image2">Comments 😊</a>
+
+                        </div>
+
+                        <div id="developmen" class="mt-3">
+
+                            <div class="p">
+                                @foreach($comments as $comment)
+
+                                @if(Auth::user()->id == $comment->user_id)
+                                @if($post->id == $comment->post_id)
+
+                                <div class="rounded border shadow p-3 my-2">
+                                    <div class="d-flex my-2" style="display:flex; justify-content:space-between;">
+                                        <div class="d-">
+                                            <h5>{{Auth::user()->name}}</h5>
+
+                                            <p class=" text-xs text-gray-500 font-semibold">{{$comment->created_at->diffForHumans()}}
+                                            </p>
+                                        </div>
+                                        <i class="fas fa-times text-red-200 hover:text-red-600 cursor-pointer" wire:click="remove({{$comment->id}})"></i>
+                                    </div>
+                                    <p class="text-gray-800 text-center">{{$comment->comments}}</p>
+
+                                </div>
+                                @endif
+                                @endif
+
+                                @endforeach
+
+                            </div>
 
 
+                        </div>
                     </div>
-                    @endif
-                    @endif
-                    @endforeach
+                    {!!Form::close()!!}
+
+
                 </div>
+                @endif
+                @endif
+                @endforeach
             </div>
         </div>
+    </div>
     </div>
 </main>
 @livewireScripts

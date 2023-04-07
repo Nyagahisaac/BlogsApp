@@ -66,7 +66,7 @@ class CommentController extends Controller
             'comment' => $comments,
         ];
         Mail::to($author)->send(new CommentNotification($data));
-        return back()->with('success', 'Comment added successfully.');
+        return back()->with('status', 'Comment added successfully.');
         // return redirect(route('comments'))->with('status', 'Comment Has Been added Successfully 😊');
     }
 

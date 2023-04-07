@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Category;
 
 use Illuminate\Http\Request;
@@ -15,8 +16,7 @@ class CategoryController extends Controller
     public function index()
     {
         $category = Category::all();
-        return view('/category',['categories' => $category]);
-        
+        return view('/category', ['categories' => $category]);
     }
 
     /**
@@ -72,21 +72,18 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $categories = Category::find($id);
-        
+        $category = Category::find($id);
+
         //Check if categories exists before deleting
-        if (!isset($categories->id)) {
-            return redirect(route('categoriess'))->with('error', 'No categories Found');
+        if (!isset($category->id)) {
+            return redirect(route('categories'))->with('error', 'No categories Found');
         }
-        
-        // Check for correct user
-        if (auth()->user()->id !== intval($categories->user_id)) {
-            return response()->json($categories);
-            return redirect(route('categoriess'))->with('error', 'Unauthorized Page');
-        }
+
         // return response()->json('here');
-        return view('', compact('categories'))->with('categoriess', $categories);
+        return view('/updateCategory',compact('category'));
     }
+
+  
 
     /**
      * Update the specified resource in storage.
@@ -103,12 +100,12 @@ class CategoryController extends Controller
         ]);
         $categories = Category::find($id);
         $categories->name = $request->name;
-        $categories->post_id =  $request -> post_id;
-    
+        $categories->post_id =  $request->post_id;
+
         $categories->save();
 
 
-        return redirect(route('categories'))->with('status', 'categories Updated 😊' );
+        return redirect(route('category'))->with('status', 'categories Updated 😊');
     }
 
     /**
@@ -131,7 +128,7 @@ class CategoryController extends Controller
         //     return redirect(route('categories'))->with('status', 'Unauthorized Page');
         // }
 
-       
+
 
         $categories->delete();
         return redirect()->back()->with('status', 'Category Removed');

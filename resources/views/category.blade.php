@@ -63,7 +63,8 @@
         </td>
        <td>
           <!-- Edit -->
-          <a href="" class="btn btn-sm btn-rounded">Edit</a>
+          <a href="" class="btn btn-default">Edit</a>
+
           <!-- Delete -->
 
           @method('DELETE')

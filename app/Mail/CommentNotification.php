@@ -6,6 +6,8 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use App\Models\Comment;
+use Illuminate\Support\Facades\Auth;
 
 class CommentNotification extends Mailable
 {
@@ -28,7 +30,11 @@ class CommentNotification extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.comment-notification')
-                    ->subject('New comment on your post');
+        $comment = Comment::where('user_id', Auth::user()->id)->latest()->paginate(1);
+
+        return $this->markdown('emails.comment-notification',['comments'=>$comment])
+                 ->subject('New comment on your post');
     }
+
+    
 }
